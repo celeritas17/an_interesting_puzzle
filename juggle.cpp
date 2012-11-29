@@ -175,10 +175,11 @@ void initialize_assignment_list(vector<vector<juggler*> >& assignment_list, vect
     }
 }
 
-//The initual distribution of jugglers is refined by swapping jugglers based on interest
-//and match score. If juggler A's preferences are not accomodated by the current distribution,
-//we check the match scores of the jugglers currently assigned to the the juggler's preferred circuit,
-//and if juggler A beats at least one of the jugglers assigned to that circuit, we swap.
+//The initial distribution of jugglers is refined by swapping jugglers based on interest
+//and match score. If juggler A's preferences are not accommodated by the current distribution,
+//we check the match scores of the jugglers currently assigned to juggler A's preferred circuits,
+//and if juggler A beats at least one of the jugglers assigned to its preferred circuits in order
+//of preference, we swap.
 //
 void refine(vector<vector<juggler*> >& assignment_list, vector<juggler*>& jugglers, vector<circuit*>& circuits){
     bool happy_here;
@@ -216,7 +217,7 @@ int main(int argc, const char* argv[])
 {
     vector<juggler*> jugglers; // the list of jugglers
     vector<circuit*> circuits; // the list of circuits.
-    vector<vector<juggler*> > assignment_list; //
+    vector<vector<juggler*> > assignment_list; //assignment_list[i] is the list of jugglers assigned to circuit[i].
     
     parse_file(jugglers, circuits, "jugglefest.txt");
     calculate_circuit_scores(jugglers, circuits);
